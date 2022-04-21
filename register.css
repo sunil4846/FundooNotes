@@ -1,0 +1,91 @@
+body{
+    font-family: 'Google Sans','Noto Sans Myanmar UI',arial,sans-serif;
+}
+
+.main-content {
+    /* width: 100%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3%;
+}
+
+.container{
+    font-family: 'Google Sans','Noto Sans Myanmar UI',arial,sans-serif;
+    padding: 3%;
+    font-size: 23px;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    height: 90vh;
+}
+
+.flex-outerdiv{
+    /* width: 100%; */
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-formdiv{
+    /* display: flex;
+    flex-direction: row; */
+    gap: 20px;
+}
+input{
+    font-size: 14px;
+    height: 20px;
+    padding: 6px 8px;
+    /* border-radius: 5px; */
+    border: 1px solid lightgray !important;
+}
+
+.btn{
+    background-color: #4285f4;
+    color: white;
+    margin: 1px;
+    width: 80px;
+    height: 45px;
+    border-radius: 5px;
+}
+
+@media only screen and (min-device-width: 300px) and (max-device-width: 819px) and (-webkit-min-device-pixel-ratio: 1) {
+    .container {
+        width: 86%;
+        height: fit-content;
+        padding: 3%;
+        font-size: 23px;
+        border: none;
+    }
+
+    .main-content {
+        margin: -4px;
+    }
+
+    .btn {
+        margin-top: -23px;
+        margin-left: 193px;
+    }
+
+    .imgOuterDiv{
+        display: none;
+    }
+
+}
+
+
+@media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (-webkit-min-device-pixel-ratio: 1) {
+    .container {
+        width: 69%;
+        height: 55vh;
+        padding: 3%;
+        margin-top: 210px;
+        font-size: 23px;
+        border-radius: 10px;
+        border: 1px solid lightgray;
+    }
+
+    .main-content {
+        margin: 19px;
+        margin-top: 227px;
+    }
+
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" /> -->
+  <script data-require="angular.js@1.5.7" data-semver="1.5.7" src="https://code.angularjs.org/1.5.7/angular.js"></script>
+  <script data-require="ui-router@0.2.18" data-semver="0.2.18" src="https://cdn.rawgit.com/angular-ui/ui-router/0.2.18/release/angular-ui-router.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <!-- <link rel="stylesheet" href="register.css"> -->
+  <script src="script.js"></script>
+
+  <!-- <script src="controller/controlRegister.js"></script> -->
+</head>
+
+<body>
+
+  <!-- <ul class="nav nav-tabs">
+    <li ui-sref-active="active">
+      <a ui-sref="register">Register</a>
+    </li>
+    <li ui-sref-active="active">
+      <a ui-sref="home">Home</a>
+    </li>
+    <li ui-sref-active="active">
+      <a ui-sref="kitchen">Kitchen</a>
+    </li>
+    <li ui-sref-active="active">
+      <a ui-sref="den">Den</a>
+    </li>
+  </ul> -->
+
+  <!--The views of the states will get populated here-->
+  <div ui-view class="container" style="padding-top:0.5em;margin: 0;"></div>
+</body>
+
+</html>

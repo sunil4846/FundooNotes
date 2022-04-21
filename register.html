@@ -1,0 +1,150 @@
+<div>
+    <title>Registeration</title>
+    <br>
+    <div class="register" style="margin-left:350px;">
+      <div>
+        <h2>Create your Account </h2>
+      </div>
+      <div>
+  
+  
+        <input type="text"  ng-model="firstName" class="Input" placeholder="First Name">
+       
+        <input type="text"  ng-model="lastName" class="Input" placeholder="Last Name" required><br><br>
+        <input type="email"  ng-model="email" class="InputEmail" placeholder="Email ID" required><br><br>
+        <input type="password" ng-model="password" class="Input" placeholder="Password" required>
+        <input type="password" ng-model="repassword" class="Input" placeholder="confirm" required><br><br>
+        <div>
+          <button type="button" ng-click="register()" class="Button">Register</button>
+          <span></span>
+        </div>
+  
+      </div>
+  
+  
+      <p>
+        <h3>Click here to Login</h3>
+      </p>
+      <a ui-sref="login">Log In</a>
+  
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+     <link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" /> 
+    <link rel="stylesheet" href="register.css">
+</head>
+
+<body> 
+    <div class="main-content">
+        <div class="container">
+            <div class="flex-outerdiv">
+                <div>
+                    <div>
+                        <span class="font" style="color: #4285f4;font-size: 20px;">F</span>
+                        <span class="font" style="color: red;font-size: 20px;">u</span>
+                        <span class="font" style="color:#f4b400;font-size: 20px;">n</span>
+                        <span class="font" style="color: #4285f4;font-size: 20px;">d</span>
+                        <span class="font" style="color: #0f9d58;font-size: 20px;">o</span>
+                        <span class="font" style="color: red;font-size: 20px;">o</span>
+                    </div>
+                    <div>
+                        <h1 style="margin-top: 12px;font-size: 22px;font-weight: 400;font-family: 'Google Sans','Noto Sans Myanmar UI',arial,sans-serif;">
+                            Create your Google Account
+                        </h1>
+                    </div>
+                    <div>
+                        <form action="" method="">
+                            <div class="flex-formdiv" style="display: flex;">
+                                <div>
+                                    <input type="text" ng-model="firstName" id="firstName" placeholder="First name">
+                                </div>
+                                <div>
+                                    <input type="text" ng-model="lastName" id="lastName" placeholder="Last name">
+                                </div>
+                            </div>
+                            <div style="margin-top: 5%;display: grid;">
+                                <input type="text" ng-model="userName" id="userName" placeholder="Username">
+                                <p style="font-size: 13px;">You can use letters,numbers & periods</p>
+                            </div>
+                            <p style="font-size: 16px;color: #4285f4;">Use my current email address instead</p>  
+                            <div class="flex-formdiv" style="display: flex;">
+                                <div>
+                                    <input type="text" ng-model="password" id="password" placeholder="Password">
+                                </div>
+                                <div>
+                                    <input type="text" ng-model="cPassword" id="cPassword" placeholder="Confirm password">
+                                </div>
+                            </div> 
+                            <p style="font-size: 13px;">Use 8 or more characters with a mix of letters, numbers & symbols</p>
+                            <div>
+                                <input type="checkbox">
+                                <span style="font-size: 18px;">Show password</span>
+                            </div>   
+                            <div style="display: flex;justify-content: space-between;margin-top: 18%;">
+                                <div>
+                                    <a href="#" style="color: #4285f4;font-size: 16px;text-decoration: none;">Sign in instead</a>
+                                </div>
+                                <div>
+                                    <button ng-click="navigateToR()" class="btn">Next</button>
+                                    <button type="submit" ng-click="register()" class="btn">Next</button>
+                                </div>
+                            </div>                         
+                        </form>
+                    </div>
+                </div>
+                <div class="imgOuterDiv">
+                    <div>
+                        <figure style="margin: 72px 4px 0;text-align: center;">
+                            <img src="https://ssl.gstatic.com/accounts/signup/glif/account.svg" alt width="244"
+                                height="244">
+                            <figcaption style="font-size: 16px;font-weight: 300;">One account. All of Google working for
+                                you.</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </body>
+
+</html> -->
