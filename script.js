@@ -1,5 +1,5 @@
 (function() {
-  angular.module('app', ['ui.router'])
+  angular.module('app', ['ui.router','ngMaterial', 'ngMessages'])
 
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -10,7 +10,7 @@
       .state('register', {
         url: "/register",
         templateUrl: "register.html",
-        controller: "kitchenCtrl"
+        controller: "registerCtrl"
       })
       .state('signin', {
         url: "/signin",
@@ -32,44 +32,165 @@
         templateUrl: "home.html",
         controller: "homeCtrl"
       })
-      .state('daashboard', {
+      .state('dashboard', {
         url: "/dashboard",
         templateUrl: "dashboard.html",
         controller: "dashboardCtrl"
       })
-      // .state('kitchen', {
-      //   url: "/kitchen",
-      //   templateUrl: "kitchen.html",
-      //   controller: "kitchenCtrl"
-      // })
-      .state('den', {
-        url: "/denCtrl",
-        templateUrl: "den.html",
-        controller: "denCtrl"
+      .state('updateNotes', {
+        // url: "/denCtrl",
+        // templateUrl: "den.html",
+        controller: "DialogController"
       })
   }])
 
-  .controller('registerCtrl', ['$scope', function($scope) {
-    // console.log("register calling");
-    $scope.navigateTo = function () {
-      console.log("register calling");
-        // var user = {
-        //     'firstname': $scope.firstName,
-        //     'lastname': $scope.lastName,
-        //     'email': $scope.email,
-        //     'password': $scope.password,
-
-        // }
-        // console.log("register calling", user);
-
-        // serviceRegister.registerUser(user, $scope);
-    }
-  }])
   .controller('homeCtrl', ['$scope', function($scope) {}])
+  
   // dashboard contorller
-  .controller('dashboardCtrl', ['$scope', function($scope) {}])
+    .controller('dashboardCtrl', ['$scope','$state','$http','$location','$mdDialog',function ($scope,$state,$http, $location,$mdDialog) {
+      console.log('creating notes calling');
+      $scope.show = false;
+      $scope.note = {
+        title:'',
+        description:''
+      }
+      $scope.createNoteSubmit = function(){
+        // console.log('something here..',$scope.note);
+        var user = {
+          'title': $scope.note.title,
+          'description': $scope.note.description        
+        }
+        console.log("creating note", user);
+        $http({
+          method: 'POST',
+          url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/addNotes',
+          headers: {
+            'Authorization': localStorage.getItem('token') 
+          },
+          data: user    
+        }).then(
+          function successCallback(response) {
+            console.log("note created successful");
+            console.log(response);
+            $scope.message = "note created successful";
+            // $location.path('/signin');
+          },
+          function errorCallback(response) {
+            console.log("note not created ", response);
+            $scope.message = response.data.message;
+          }
+        );
+      }
+      $scope.modalOpen = function () {
+        $scope.show = true; 
+      };
+      // get all notes
+      var user = {
+        'title': $scope.note.title,
+        'description': $scope.note.description        
+      }
+      console.log("creating note", user);
+      $scope.notes = [
+        {
+          'title': user.title,
+          'description': user.description       
+        },
+        $http({ 
+          method: 'GET',
+          url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList',
+          headers: {
+            'Authorization': localStorage.getItem('token') 
+          },
+          // data: user    
+        }).then(
+          function successCallback(response) {
+            console.log("get note created successful");
+            console.log(response);
+            $scope.notes = response.data.data.data;
+            console.log($scope.notes);
+            $scope.message = "get note created successful";
+            // $location.path('/signin');
+          },
+          function errorCallback(response) {
+            console.log("get note not created ", response);
+            $scope.message = response.data.message;
+          }
+        )
+      ];
+      
+      //modal popup 
+      $scope.getNoteModalOpen = function(ev,note){
+        $scope.user = {
+          'title': note.title,
+          'description': note.description
+        }
+        // console.log("show modal popup",user);
+        // console.log("show modal popup",user);
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'updatenotes.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          resolve: {
+            user: function(){
+              return user;
+            }
+          }
+        })
+      }
+
+      //delete Note 
+      $scope.deleteNote = function(note){
+        // console.log(note);
+        let req = {
+          noteIdList: [this.note.id],
+          isDeleted: true,
+        }
+        console.log(req);
+        // url:'http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes';
+        $http({ 
+          method: 'POST',
+          url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/deleteForeverNotes',
+          headers: {
+            'Authorization': localStorage.getItem('token') 
+          },          
+          data: req    
+        }).then(
+          function successCallback(response) {
+            console.log("note deleted successful");
+            console.log(response);
+            $scope.notes = response.data;
+            console.log($scope.notes);
+            $scope.message = "note deleted successful";
+            $location.path('/dashboard');
+          },
+          function errorCallback(response) {
+            console.log("note not deleted  ", response);
+            $scope.message = response.data.message;
+          }
+        )
+      }
+
+    }])
+    .controller('DialogController',['$scope','$mdDialog', function($scope, $mdDialog) {
+      console.log($scope.user);
+      $scope.title = user.title;
+      $scope.description = user.description;
+      $scope.hide = function() {
+        $mdDialog.hide();
+      };
+  
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+  
+      $scope.answer = function(answer) {
+        $mdDialog.hide(answer);
+      };
+    }])
   // registration controller
-  .controller('kitchenCtrl', ['$scope', '$state', '$http', '$location', function ($scope, $state, $http, $location) {
+  .controller('registerCtrl', ['$scope', '$state', '$http', '$location', function ($scope, $state, $http, $location) {
       console.log("register calling");
       $scope.register = function () {
         console.log("register calling");
@@ -78,6 +199,7 @@
           'lastName': $scope.lastName,
           'email': $scope.email,
           'password': $scope.password,
+          'cPassword': $scope.cPassword,
           'service': 'advance'
         }
         console.log("register calling", user);
@@ -120,7 +242,8 @@
       }).then(
         function successCallback(response) {
           console.log("signin successful");
-          console.log(response);
+          console.log(response.data.id);
+          localStorage.setItem('token',response.data.id);
           $scope.message = "signin successful";
           $location.path('/dashboard');
         },
@@ -129,7 +252,6 @@
           $scope.message = response.data.message;
         }
       );
-
     };
   }])
   
@@ -147,7 +269,6 @@
         method: 'POST',
         url: 'http://fundoonotes.incubation.bridgelabz.com/api/user/reset-password',
         data: user
-
       }).then(
         function successCallback(response) {
           console.log("reset successful");
@@ -160,7 +281,6 @@
           $scope.message = response.data.message;
         }
       );
-
     };
   }])
   // forgot password controller
@@ -193,6 +313,8 @@
     };
   }])
   .controller('denCtrl', ['$scope', function($scope) {}])
+
+  
 
 })();
 

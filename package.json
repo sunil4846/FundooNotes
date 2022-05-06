@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "angular-material": "http://github.com/angular/bower-material/tarball/master",
+    "angular-ui-bootstrap": "^2.5.6"
+  }
+}

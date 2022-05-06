@@ -14,16 +14,19 @@ html, body {
     width: 100%;
     background-color: #fff;
     box-shadow: 0px 0px 5px 0px #ddd;
-    position: fixed;
-    height: 90px!important;
-    z-index: 20;
+    position: absolute;
+    /* height: 90px!important; */
+    /* z-index: 20; */
+    margin-left: -12px;
+    margin-top: -10px;
   }
   nav {
+    font-size: large;
     height: 100%;
-    position: fixed;
+    position: absolute;
     left: 0;
-    width: 320px;
-    margin-top: 90px;
+    width: 250px;
+    margin-top: 45px;
     transform: translateX(-320px);
     transition: transform 260ms ease-in-out;
     background-color: white;
@@ -35,13 +38,14 @@ html, body {
     border-top: 1px solid #eee;
   }
   nav ul>li {
+    font-size: smaller;
     list-style: none;
     color: #fff;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 20px;
+    padding: 12px;
     cursor: pointer;
-    border-bottom: 1px solid #eee;
+    /* border-bottom: 1px solid #eee; */
     transition: .25s
   }
   nav ul>li span {
@@ -213,11 +217,14 @@ main {
 }
 
 #form-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   border-radius: 8px;
-  border: 0.5px solid #d3d3d3;
-  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
-    0 2px 6px 2px rgba(60, 64, 67, 0.149);
-  margin: 32px auto 16px auto;
+  /* border: 0.5px solid #d3d3d3; */
+  /* box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
+    0 2px 6px 2px rgba(60, 64, 67, 0.149); */
+  margin: 60px auto 16px auto;
   max-width: 496px;
   transition-duration: 0.218s;
   transition-property: background, border, opacity, box-shadow, transform;
@@ -256,6 +263,15 @@ main {
   padding-left: 4px;
 } */
 
+.createNoteField{
+  box-shadow: 0 3px 5px rgb(0 0 0 / 45%);
+  margin: 80px auto 16px auto;
+}
+
+#showModal{
+  position: relative;
+}
+
 #notes {
   display: flex;
   flex-wrap: wrap;
@@ -270,7 +286,7 @@ main {
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5rem;
-  /* box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); */
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
   letter-spacing: 0.00625em;
   border: 0;
   overflow: hidden;
@@ -536,11 +552,31 @@ input:focus {
   background-color: rgba(95, 99, 104, 0.039);
 }
 
-.open-modal {
+/* .open-modal {
   opacity: 1;
   visibility: visible;
   transform: scale(1);
   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+} */
+
+.container-getNote{
+  position: relative;
+  width: 1200px;
+  height: 100%;
+  /* text-align: center; */
+}
+
+.container-getNote .getNote{
+  box-shadow: 0 3px 5px rgb(0 0 0 / 20%);
+  position: relative;
+  width: calc(250px - 20px);
+  height: calc(170px - 20px);
+  /* background: orange; */
+  float: left;
+  margin: 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 #white {
@@ -559,7 +595,78 @@ input:focus {
   background: #a7ffeb;
 }
 
+.material-symbols-sharp {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
 
+.navtext a{
+  border:solid 1px #fff;
+	display: block;
+  padding: 7px;
+  position: relative;
+}
+
+.deleteSpan span{
+  font-family: 'Raleway', sans-serif;
+    font-size:14px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    bottom: 0;
+    left: 47px;
+    line-height: 38px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 0;
+    
+    /* CSS3 Transition: */
+	-webkit-transition: 0.50s;
+	transition: 0.50s;  
+}
+
+.navtext a:hover span{ width:auto; padding:0 30px;overflow:visible; }
+.navtext a:hover{text-decoration:none;}
+.navtext a span{
+	background-color:#fff;
+	color:#3d4f0c;
+}
+
+.iconsGetNote{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.iconsTakeNote{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: -85px;
+  position: relative;
+}
+
+.iconsCreateNote{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.iconsHead{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
   @media screen and (max-width: 640px) {
    nav {
       height: 100%;

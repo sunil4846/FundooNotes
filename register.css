@@ -15,7 +15,7 @@ body{
     padding: 3%;
     font-size: 23px;
     border-radius: 10px;
-    border: 1px solid lightgray;
+    /* border: 1px solid lightgray; */
     height: 90vh;
 }
 
@@ -34,8 +34,8 @@ input{
     font-size: 14px;
     height: 20px;
     padding: 6px 8px;
-    /* border-radius: 5px; */
-    border: 1px solid lightgray !important;
+    border-radius: 5px; 
+    /* border: 1px solid lightgray !important; */
 }
 
 .btn{
