@@ -477,7 +477,7 @@ input:focus {
   display: none;
 }
 
-#color-tooltip {
+/* #color-tooltip {
   border-bottom: 2px solid #fff;
   position: absolute;
   top: -40;
@@ -503,7 +503,7 @@ input:focus {
 
 .color-option:hover {
   border: 1px solid black;
-}
+} */
 
 .modal {
   position: fixed;
@@ -514,7 +514,7 @@ input:focus {
   height: 100%;
   background-color: rgba(229, 229, 229, 0.5);
   opacity: 0;
-  visibility: hidden; /* keeps modal closed unless clicked on */
+  visibility: hidden;
   transform: scale(1.1);
   transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
 }
@@ -554,20 +554,20 @@ input:focus {
 
 .modal-close-button:hover {
   background-color: rgba(95, 99, 104, 0.039);
-}
+} */
 
-/* .open-modal {
+.open-modal {
   opacity: 1;
   visibility: visible;
   transform: scale(1);
   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
-} */
+}
 
-.container-getNote{
+ .container-getNote{
   position: relative;
   width: 1200px;
   height: 100%;
-  /* text-align: center; */
+ 
 }
 
 .container-getNote .getNote{
@@ -575,7 +575,7 @@ input:focus {
   position: relative;
   width: calc(250px - 20px);
   height: calc(160px - 20px);
-  /* background: orange; */
+
   float: left;
   margin: 15px;
   box-sizing: border-box;

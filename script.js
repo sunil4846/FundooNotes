@@ -38,15 +38,18 @@
         controller: "dashboardCtrl"
       })
       .state('updateNotes', {
-        // url: "/denCtrl",
-        // templateUrl: "den.html",
         controller: "DialogController"
+      })
+      .state('archive', {
+        url: "/archive",
+        templateUrl: "archive.html",
+        controller: "archiveCtrl"
       })
   }])
 
-  .controller('homeCtrl', ['$scope', function($scope) {}])
+    .controller('homeCtrl', ['$scope', function($scope) {}])
   
-  // dashboard contorller
+    // dashboard contorller
     .controller('dashboardCtrl', ['$scope','$state','$http','$location','$mdDialog',function ($scope,$state,$http, $location,$mdDialog) {
       console.log('creating notes calling');
       $scope.show = false;
@@ -104,9 +107,16 @@
           // data: user    
         }).then(
           function successCallback(response) {
-            console.log("get note created successful");
+            // console.log("get note created successful");
             console.log(response);
-            $scope.notes = response.data.data.data;
+            $scope.notesArray = response.data.data.data;
+            $scope.notes = $scope.notesArray.filter((item) => {
+              console.log(item);
+              return item.isArchived === false && item.isDeleted === false;
+
+            })
+            console.log($scope.notes);
+            // $scope.notes = response.data.data.data;
             console.log($scope.notes);
             $scope.message = "get note created successful";
             // $location.path('/signin');
@@ -124,8 +134,6 @@
           'title': note.title,
           'description': note.description
         }
-        // console.log("show modal popup",user);
-        // console.log("show modal popup",user);
         $mdDialog.show({
           controller: 'DialogController',
           templateUrl: 'updatenotes.html',
@@ -140,18 +148,47 @@
         })
       }
 
+      // archive notes
+      $scope.archiveNote = function(note){
+        let req = {
+          noteIdList: [note.id],
+          isArchived: true,
+        }
+        console.log(req);
+        $http({ 
+          method: 'POST',
+          url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/archiveNotes',
+          headers: {
+            'Authorization': localStorage.getItem('token') 
+          },          
+          data: req    
+        }).then(
+          function successCallback(response) {
+            console.log("note archived successful");
+            console.log(response);
+            $scope.notes = response.data;
+            console.log($scope.notes);
+            $scope.message = "note archived successful";
+            $location.path('/dashboard');
+          },
+          function errorCallback(response) {
+            console.log("note not archived", response);
+            $scope.message = response.data.message;
+          }
+        )
+      }
       //delete Note 
       $scope.deleteNote = function(note){
         // console.log(note);
         let req = {
-          noteIdList: [this.note.id],
+          noteIdList: [note.id],
           isDeleted: true,
         }
         console.log(req);
         // url:'http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes';
         $http({ 
           method: 'POST',
-          url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/deleteForeverNotes',
+          url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes',
           headers: {
             'Authorization': localStorage.getItem('token') 
           },          
@@ -172,6 +209,9 @@
         )
       }
 
+      // color palette
+      
+
     }])
     .controller('DialogController',['$scope','$mdDialog', function($scope, $mdDialog) {
       console.log($scope.user);
@@ -189,6 +229,49 @@
         $mdDialog.hide(answer);
       };
     }])
+
+  //archive display note
+  .controller('archiveCtrl',['$scope','$http', function($scope,$http) {
+     // get all archive notes
+     var user = {
+      'title': $scope.note.title,
+      'description': $scope.note.description        
+    }
+    console.log("creating note", user);
+    $scope.archiveNotes = [
+      {
+        'title': user.title,
+        'description': user.description       
+      },
+      $http({ 
+        method: 'GET',
+        url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList',
+        headers: {
+          'Authorization': localStorage.getItem('token') 
+        },
+        // data: user    
+      }).then(
+        function successCallback(response) {
+          // console.log("get note created successful");
+          console.log(response);
+          $scope.notesArray = response.data.data.data;
+          $scope.notes = $scope.notesArray.filter((item) => {
+            console.log(item);
+            return item.isArchived === false && item.isDeleted === false;
+
+          })
+          console.log($scope.notes);
+          // $scope.notes = response.data.data.data;
+          $scope.message = "get all archive note created successful";
+          // $location.path('/signin');
+        },
+        function errorCallback(response) {
+          console.log("get all archive note not created ", response);
+          $scope.message = response.data.message;
+        }
+      )
+    ];
+  }]) 
   // registration controller
   .controller('registerCtrl', ['$scope', '$state', '$http', '$location', function ($scope, $state, $http, $location) {
       console.log("register calling");

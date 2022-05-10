@@ -35,22 +35,22 @@
                         <li style="background-color: #feefc3;border-radius: 0 25px 25px 0;"><span class="material-symbols-outlined" style="padding: 10px;">lightbulb</span><a href="#">Notes</a></li>
                         <li style="border-radius: 0 25px 25px 0;"><span class="material-symbols-outlined" style="padding: 10px;">notifications</span><a href="#">Remainders</a></li>
                         <li style="border-radius: 0 25px 25px 0;"><span class="material-symbols-outlined" style="padding: 10px;">edit</span><a href="#">Edit labels</a></li>
-                        <li style="border-radius: 0 25px 25px 0;"><span class="material-symbols-outlined" style="padding: 10px;">archive</span><a href="#">Archive</a></li>
+                        <li style="border-radius: 0 25px 25px 0;"><span class="material-symbols-outlined" style="padding: 10px;">archive</span><a ng-href="../archive.html">Archive</a></li>
                         <li style="border-radius: 0 25px 25px 0;"><span class="material-symbols-sharp" style="padding: 10px;">delete</span><a href="#">Trash</a></li>
                     </ul>
                 </nav>   
             </div>            
-            <div style="margin-left: 60px;margin-top: 16px;">
-                <img src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png" alt="">                
+            <div style="margin-left: 60px;margin-top: 8px;">
+                <img src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png" alt="" style="width: 40px;height: 40px;margin-bottom: 5px;">                
             </div> 
-            <div style="font-size: 22px;">
-                <p style="margin-top: 20px;margin-bottom: 1rem;" >Fundoo</p>
+            <div>
+                <p style="margin-top: 20px;margin-bottom: 1rem;font-family: 'Product Sans',Arial,sans-serif;color: #5f6368;opacity: 1;font-size: 22px;line-height: 24px;" >Fundoo</p>
             </div>  
             <div class="row  d-flex justify-content-left align-items-center" style="padding-left: 50px;">
                 <div class="col-md-5">
                     <div class="form"> 
-                        <i class="fa fa-search"></i> 
-                        <input type="text" class="form-control form-input" placeholder="Search anything..." style="background-color: #ced4da;"> 
+                        <!-- <i class="fa fa-search"></i>  -->
+                        <input type="text" class="form-control form-input" placeholder="Search anything..." style="background-color: #f1f3f4;border-radius: 8px;"> 
                         <span class="left-pan"></span> 
                     </div>    
                 </div>
@@ -66,7 +66,7 @@
     </header>
    
     <!-- <div class="container"> -->
-        <div class="row" style="width: 50%;padding: 5px;margin-left: 275px;position: absolute;">
+        <div class="row" style="width: 50%;padding: 5px;margin-left: 220px;position: absolute;">
             <main>
                 <div ng-if="show" class="createNoteField">
                     <input type="text" ng-model="note.title" class="modal-title" placeholder="Title">
@@ -74,9 +74,9 @@
                     <div class="iconsCreateNote">
                         <span class="material-symbols-sharp">add_alert</span> 
                         <span class="material-symbols-sharp">person_add</span>
-                        <span class="material-symbols-sharp">palette</span>
+                        <span class="material-symbols-sharp" style="cursor: pointer;">palette</span>
                         <span class="material-symbols-sharp">image</span>
-                        <span class="material-symbols-sharp">archive</span>
+                        <span class="material-symbols-sharp" ng-click="archiveNote(note)">archive</span>
                         <span class="material-symbols-sharp" ng-click="deleteNote(note)" style="padding: 10px;">delete</span>   
                         <button type="button" id="form-close-button" ng-click="createNoteSubmit()">Close</button>
                     </div>
@@ -95,14 +95,36 @@
                 <!-- get note -->
                 <div class="container-getNote">
                     <div class="getNote" ng-repeat="note in notes" ng-click="getNoteModalOpen($event,note)" data-toggle="modal">
-                        <h3 style="padding: 10px;margin: 0px;">{{note.title}}</h3> 
-                        <h3 style="padding: 10px;margin: 0px;">{{note.description}} </h3>  
+                        <h3 style="padding: 10px;margin: 0px; font-size: 20px;">{{note.title}}</h3> 
+                        <h3 style="padding: 10px;margin: 0px; font-size: 20px;">{{note.description}} </h3>  
                         <div class="iconsGetNote">
                             <span class="material-symbols-sharp">add_alert</span> 
                             <span class="material-symbols-sharp">person_add</span>
-                            <span class="material-symbols-sharp">palette</span>
+                            <div class="colorPalette"><span class="material-symbols-sharp" style="cursor: pointer;">palette</span>
+                                <div class="hide">
+                                    <div style="background-color: #f28b82;"></div>
+                                    <div style="background-color: #fbbc04;"></div>
+                                    <div style="background-color: #fff475;"></div>
+                                    <div style="background-color: #ccff90;"></div>
+                                    <div style="background-color: #a7ffeb;"></div>
+                                    <!-- <ul>
+                                        <li style="background-color: #f28b82;"></li>
+                                        <li style="background-color: #fbbc04;"></li>
+                                        <li style="background-color: #fff475;"></li>
+                                        <li style="background-color: #ccff90;"></li>
+                                        <li style="background-color: #a7ffeb;"></li>
+                                    </ul>
+                                    <ul>
+                                        <li style="background-color: #cbf0f8;"></li>
+                                        <li style="background-color: #aecbfa;"></li>
+                                        <li style="background-color: #d7aefb;"></li>
+                                        <li style="background-color: #fdcfe8;"></li>
+                                        <li style="background-color: #e6c9a8;"></li>
+                                    </ul> -->
+                                </div>
+                            </div>
                             <span class="material-symbols-sharp">image</span>
-                            <span class="material-symbols-sharp">archive</span>
+                            <span class="material-symbols-sharp" ng-click="archiveNote(note)" style="cursor: pointer;">archive</span>
                             <span class="material-symbols-sharp" ng-click="deleteNote(note)" style="padding: 10px;cursor: pointer;">delete</span>   
                         </div>
                         
@@ -113,21 +135,6 @@
             </main>                
         </div>
     <!-- </div> -->
-    
-    
-    <!-- <div style="margin-top: 135px;position: absolute;top: 0;">
-        <ul style="list-style: none;">
-            <li style="padding-bottom: 20px;"><i class="fa fa-lightbulb-o" aria-hidden="true"
-                        style="color: black;font-size: 32px;"></i></li>
-            <li style="padding-bottom: 20px;margin-left: -6px;"><i class="fa fa-bell-o" aria-hidden="true"
-                        style="color: black;font-size: 32px;"></i> </li>
-            <li style="padding-bottom: 20px;"><i class="fa fa-pencil" aria-hidden="true"
-                        style="color: black;font-size: 32px;"></i></li>
-            <li style="padding-bottom: 20px;"><i class="fa fa-archive" aria-hidden="true"
-                        style="color: black;font-size: 32px;"></i></li>
-            <li><i class="fa fa-trash-o" aria-hidden="true" style="color: black;font-size: 32px;"></i></li>
-        </ul>
-    </div>    -->
-    
+        
 </body>
 </html>
